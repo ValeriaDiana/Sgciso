@@ -8,12 +8,13 @@
   <body>
     <div id="fondologin">
 
-      <div id="titulo">
-        <p>LÓGICA DIFUSA APLICADA EN LA EVALUACIÓN <br/> DE LA CALIDAD DE <BR/>LOS PROCESOS DE CERTIFICACIÓN <br/> BASADOS EN LA NORMA ISO 9001 <br/>PARA EL APOYO A LA TOMA DE DECISIONES<br/>CASO: UNIDAD DE CALIFICACIÓN DE AÑOS DE SERVICIO</p>
-      </div>
+  <!--    <div id="titulo">
+        <p>LÓGICA DIFUSA APLICADA EN LA EVALUACIÓN  <BR/>DE LOS PROCESOS DE CERTIFICACIÓN DE LA CALIDAD <br/> BASADOS EN LA NORMA ISO 9001 <br/>PARA EL APOYO A LA TOMA DE DECISIONES<br/>CASO: UNIDAD DE CALIFICACIÓN DE AÑOS DE SERVICIO</p>
+      </div>-->
       <div class="dd">
         <form action="procesologin.php" id="formlogin" method="post">
           <img src="img/logo.png"></img>
+          <label placeholder="&#128100">
           <input type="text" placeholder="&#128100; Usuario" name="usuario" required>
           <input type="password" placeholder="&#128273; Contraseña" name="contrasena" required>
           <input type="submit"  value="&#128274; Ingreso" >

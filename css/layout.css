@@ -30,7 +30,20 @@ a:hover {
 ----------------------------------------------- */
 .container_12,
 .container_16 {
-	background:#f0f2eb;
+	background-image: url("../img/146H.jpg");
+	background-position: center center;
+	background-size: cover;
+	/* La imagen de fondo no se repite */
+10
+	  background-repeat: no-repeat;
+11
+
+12
+	  /* La imagen de fondo está fija en el viewport, de modo que no se mueva cuando
+13
+	     la altura del contenido supere la altura de la imagen. */
+14
+	  background-attachment: fixed;
 }
 /* headings
 ----------------------------------------------- */
@@ -89,7 +102,7 @@ h2#page-heading {
 .box h2 {
 	font-size:1.2em;
 	font-weight:bold;
-	color:#1B548D;
+	color:white;
 	background:#007c82 	;
 	margin:-10px -10px 0 -10px;
 	padding:10px 12px;
@@ -126,8 +139,8 @@ h2#page-heading {
 
 .block {
 	padding-top:20px;
-	padding-left: 25px;
-	padding-right: 25px;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 div.menu {
 	padding:0;
@@ -143,7 +156,7 @@ div.menu .block {
 /* sidebar menu
 ----------------------------------------------- */
 
-.box.sidemenu{ color: #eee; background:radial-gradient( #93979a, #204562 ); border-right:1px solid #3A5665; padding:0px; margin:0px; cursor:pointer; }
+.box.sidemenu{ background:radial-gradient( #93979a, #204562 ); color: #eee;  border-right:1px solid #3A5665; padding:0px; margin:0px; cursor:pointer; }
 .box.sidemenu .block{padding-top:0px; margin-top:0px;}
 
 
@@ -277,7 +290,7 @@ img.left
 }
 img.right
 {
-	margin: 10px 0 10px 10px;
+	margin: 0 0 10px 10px;
 	border: none;
 	float: right;
 }

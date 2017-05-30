@@ -48,21 +48,22 @@ $('#slider div:first-child').fadeOut(0)
 
 <div class="container_12">
   <div class="grid_12 header-repeat">
+    <div class="floatleft">
+        <a  href="index.php"><img width="200px" height="50px" src="img/cas.png" alt="Logo" /> </a></div>
       <div id="branding">
-          <div class="floatleft">
-              <a  href="index.php"><img width="100px" height="40px" src="img/logo.png" alt="Logo" /> </a></div>
+
           <div class="floatright">
-              <div class="floatleft">
-                  <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
+
               <div class="floatleft marginleft10">
                   <ul class="inline-ul floatleft">
                       <li><?php if (isset($_SESSION['nombre_usuario'])) {
-                      echo "Bienvenido, ".$_SESSION['nombre_usuario'];
+                      echo "Bienvenid@, ".$_SESSION['nombre_usuario'];
                       }
                       else {
                       echo "<script language ='javascript'>location.href = 'login.php';</script>";
                       } ?></li>
-                      <li><a href="gestusuario.php">&#128104; Config</a></li>
+                      <li><a href="gestusuario.php"><span>&#128104;</span> </a>Config</li>
+                      <li><a href="comunicacion.php">Chat</a></li>
                       <li><a href="salir.php">Salir</a></li>
                   </ul>
               </div>
@@ -75,58 +76,53 @@ $('#slider div:first-child').fadeOut(0)
         <a href="#" class="bt-menu"><span class="icon-list2"></span>Menu</a>
     </div>
       <ul class="nav main">
-          <li><a href=""><span> &#128202; Gestión de calidad</span></a>
+          <li><a href=""><span> &#128202;</span> Gestión de calidad</a>
             <ul>
                 <li><a href="gescal.php">Evaluación de requisitos</a> </li>
                 <li><a href="resultados.php">Resultados</a> </li>
             </ul></li>
-          <li><a href="documentacion.php"><span>&#128459; Documentos</span></a>
+          <li><a href="documentos.php"><span>&#128459;</span> Documentos</a>
             <ul>
-                               <li><a href="">Revisión</a> </li>
-                               <li><a href="">Aprobación</a> </li>
-                               <li><a href="">Control de cambios y versiones</a> </li>
-                               <li><a href="">Documentos en vigencia/obsoletos</a> </li>
-                               <li><a href="">Distribución de documentos</a> </li>
-                               <li><a href="">Gestión de registros</a> </li>
-                                <li><a href="">Formatos</a> </li>
+                              <li><a href="documentosreg.php">Registros</a></li>
+                              <li><a href="docregpres.php">Registros de prestación de servicio</a></li>
+                              <li><a href="documentos.php">Procedimientos</a></li>
+                              <li><a href="documentos.php">Manual de calidad</a></li>
+                              <li><a href="documentos.php">Instructivo de trabajo</a></li>
+                              <li><a href="documentos.php">Anexos</a></li>
+
                            </ul>
           </li>
-          <li><a href="procesos.php"><span>&#128471; Procesos</span></a>
+          <li><a href="procesos.php"><span>&#128471;</span> Procesos</a>
             <ul>
-                 <li><a href="">Mapa de procesos</a> </li>
-                 <li><a href="">Identificación de procesos</a> </li>
+
+                 <li><a href="procesos.php">Identificación de procesos</a> </li>
              </ul>
           </li>
-          <li><a href="objetivos.html"><span>&#128505; Objetivos</span></a>
+          <li><a href="objetivos.php"><span>&#128505; </span>Objetivos </a>
             <ul>
                  <li><a href="">Establecimiento de objetivos de calidad</a> </li>
-                 <li><a href="">Objetivos estratégicos</a> </li>
              </ul>
            </li>
-          <li><a href="recursos.html"><span>&#128423; Recursos</span></a>
+          <li><a href="recursos.php"><span>&#128423;</span> Recursos</a>
              <ul>
                   <li><a href="">Gestión de hojas de vida</a> </li>
-                  <li><a href="">Recursos infraestructura/calibración</a> </li>
               </ul>
           </li>
-          <li><a href="auditoria.html"><span>&#128214; Auditoría interna</span></a>
+          <li><a href="auditoria.php"><span>&#128214; </span>Auditoría interna</a>
                            <ul>
                                <li><a href="">Plan de auditorías</a> </li>
-                               <li><a href="">Informes de auditoría</a> </li>
-                               <li><a href="">Acciones correctivas</a> </li>
                            </ul>
           </li>
-          <li><a href="hallazgos.html"><span>&#128501; Hallazgos</span></a>
+          <li><a href="hallazgos.php"><span>&#128501; </span>Hallazgos</a>
             <ul>
-                <li><a href="">Registro de hallazgos</a> </li>
-                <li><a href="">Acciones a llevar a cabo</a> </li>
-                <li><a href="">Eliminación de causas de hallazgos potenciales</a> </li>
-            </ul>
+                <li><a href="hallazgos.php">Lista de hallazgos</a> </li>
+                          </ul>
           </li>
-          <li><a href="agenda.html"><span>&#128198; Agenda</span></a></li>
-           <li><a href="informes.html"><span> &#128104;Informes y reportes</span></a></li>
-           <li><a href="comunicacion.php"><span> &#128104;Comunicación interna</span></a></li>
-         </ul>
+          <li><a href="registros.php"><span>&#128501; </span>Registros</a>
+            <ul>
+                <li><a href="hallazgos.php">Lista de registros</a> </li>
+                          </ul>
+          </li>
   </div>
   <div class="clear">
   </div>

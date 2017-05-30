@@ -16,9 +16,19 @@ switch ($boton)
         $email = utf8_decode($_POST['email']);
         $nombreusuario = utf8_decode($_POST['nombreusuario']);
         $contrasena = utf8_decode($_POST['contrasena']);
-              $consulta = "INSERT INTO usuario (codigo_usuario, nombre_completo, email , nombre_usuario, contrasena ,perfil, estado ,tipo_modificacion) VALUES ('$codigo','$nombre','$email','$nombreusuario','$contrasena','$perfil','$estado','$crear')";
+        $ruta = "fotos/";
+        opendir($ruta);
+        $destino = $ruta.$_FILES['foto']['name'];
+          copy($_FILES['foto']['tmp_name'],$destino);
+
+
+          $foto=$_FILES['foto']['name'];
+              $consulta = "INSERT INTO usuario (codigo_usuario, nombre_completo, email , nombre_usuario, contrasena ,perfil, estado , foto_perfil) VALUES ('$codigo','$nombre','$email','$nombreusuario','$contrasena','$perfil','$estado','$foto')";
               $rs = mysqli_query( $conexion, $consulta);
-              header('Location: gestusuario.php');
+              echo "<script>";
+              echo "alert('Nuevo usuario registrado');";
+            
+              echo "</script>";
         break;
         case 'Modificar':
 
@@ -27,21 +37,14 @@ switch ($boton)
           $email = utf8_decode($_POST['email']);
           $nombreusuario = utf8_decode($_POST['nombreusuario']);
           $contrasena = utf8_decode($_POST['contrasena']);
-              $query = "UPDATE usuario SET estado = 'inactivo' WHERE codigo_usuario ='$codigo'; INSERT INTO usuario (codigo_usuario, nombre_completo, email , nombre_usuario, contrasena ,perfil, estado ,tipo_modificacion) VALUES ($codigo,'$nombre','$email','$nombreusuario','$contrasena','$perfil','$estado','$actualizar')";
+              $query = "UPDATE usuario SET nombre_completo = '$nombre', email = '$email', nombre_usuario ='$nombreusuario',  contrasena= '$contrasena', perfil= '$perfil', estado = '$estado' WHERE codigo_usuario ='$codigo';";
 
-            /* ejecutar multi consulta */
-              if (mysqli_multi_query($conexion,$query)){
-                  do{
-                          /* almacenar primer juego de resultados */
-                     if ($result=mysqli_store_result($conexion)){
-                        while ($row=mysqli_fetch_row($result)){
-                           printf("%s\n",$row[0]);
-                        }
-                        mysqli_free_result($conexion);
-                     }
-                  }while (mysqli_next_result($conexion));
-               }
-               mysqli_close($conexion);
+            $rs = mysqli_query( $conexion, $query);
+            echo "<script>";
+            echo "alert('Usuario modificado');";
+            echo "history.back();";
+            echo "</script>";
+      break;
 
         break;
 

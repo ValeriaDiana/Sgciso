@@ -1,6 +1,14 @@
-  ﻿<!DOCTYPE html>
+  ﻿<!DOCTYPE html><?php
+
+  include ('conexion.php');
+  include ('menu.php');
+
+  ?>
+
+
 <html>
 <head>
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <!--  <meta http-equiv="REFRESH" content="1 ; url=index.php" /> -->
     <title>Inicio</title>
@@ -22,60 +30,64 @@
 
     <script src="js/setup.js" type="text/javascript"></script>
 <body>
+
+
   <div class="container_12">
-<?php
-include ('conexion.php');
-include ('menu.php');
-?>
 
 
 
   <div class="grid_2">
-      <div class="box sidemenu">
-          <div class="block" id="section-menu">
-              <ul class="section menu">
-                  <li><a class="menuitem">Norma</a>
-                      <ul class="submenu">
-                          <li><a href="index.php">Iso 9001</a> </li>
-                      </ul>
-                  </li>
-                  <li><a class="menuitem">Organizacion</a>
-                      <ul class="submenu">
-                          <li><a>Perfil</a> </li>
-                          <li><a>Mision</a> </li>
-                          <li><a>Vision</a> </li>
-                          <li><a>Organigrama</a> </li>
-                      </ul>
-                  </li>
-                  <li><a class="menuitem">Tareas</a>
-              </ul>
-          </div>
-      </div>
+  <?php  include('menuvertical.php');?>
+
   </div>
 
 
 
-        <div class="grid_10">
+        <div class="grid_8">
+      <!--    <div class="imginicio">
+            <p>BIENVENIDO</p>
+            <p>SISTEMA DE GESTIÓN DE CALIDAD</p>
+            <p>BASADO EN LA NORMA ISO 9001</p>
+          </div>
+-->
+          <div class="box round">
 
-            <div class="box round">
-                <h2>
-                    Organizacion</h2>
-                  <img width="250px" height="180px" src="img/logo_cas.png" alt="Logo" />
+                  <table id='tablainicio'>
+                    <thead  id ='cabezatablainicio' style="">
+                      <th style="background-color: white; "> Objetivos</th>
+                      <th style="background-color: white;">Infraestructura</th>
+                      <th style="background-color: white;">Personal</th>
+                      <th style="background-color: white;">No conformidades</th>
+                      <th style="background-color: white;">Nivel de calidad</th>
+                    </thead>
+                    <tbody style="height:100px; width:100px; font-size:48; ">
+                      <tr  style="height:40px; background-color:white;">
+                        <td style="border-left:solid;">&#10003;</td>
+                        <td style="border-left:solid;">&#128187;</td>
+                        <td style="border-left:solid; ">&#9997;</td>
+                        <td style="border-left:solid;">&#9928; </td>
+                        <td style="border-left:solid; border-right:solid;">&#128505; </td>
+                      </tr>
+                      <tr style="background-color:white;">
+                        <td style="border-left:solid;">3</td>
+                        <td style="border-left:solid;"></td>
+                        <td style="border-left:solid;"></td>
+                        <td style="border-left:solid;"><?php echo round((100-include('cumplimiento.php')),0); ?>%</td>
+                        <td style="border-left:solid;border-right:solid;"><?php echo round(include('cumplimiento.php'),0); ?>%</td>
+                     </tr>
+                    </tbody>
+
+                  </table>
 
             </div>
-            <div class="box round">
-                <h2>
-                    Mision y Visión</h2>
-                <div class="block">
                   <div id="slider">
                       <div><a href="#"><img src="img/mision.png"/></a><h3>MISION</h3><p>Ser una entidad moderna y transparente que cuente con información de servidores y ex servidores público</p></div>
                       <div><a href="#"><img src="img/vision.png"/></a><h3>VISION</h3><p>Ser una entidad moderna y transparente que cuente con información de servidores y ex servidores público</p></div>
                       <div><a href="#"><img src="img/politica.png"/></a><h3>POLITICA DE CALIDAD</h3><p>"La Unidad de Calificación Años de Servicio UCAS, dependiente del Ministerio de Economia y Finanzas Publicas , asume el firme compromiso de satisfacer los requisitos del usuario/cliente. brindandole un servicio oportuno , transparente y eficas en la emision de Calificacion de Años de Servicio, Fotocopia Legalizada y Certificado de No Servidor Publico, en cumplimiento a la normativa vigente, asimismo, mejorar continuamente los procesos de nuestro Sistema de Gestion de la Calidad, enmarcados en la calidad, calidez y transparencia."</p></div>
                   </div>
-                </div>
-            </div>
+
         </div>
-        <div class="grid_5">
+        <div class="grid_4">
             <div class="box round">
                 <h2>Historia</h2>
                 <div class="block">
@@ -87,7 +99,7 @@ include ('menu.php');
                 </div>
             </div>
         </div>
-        <div class="grid_5">
+        <div class="grid_4">
             <div class="box round">
                 <h2>Organigrama</h2>
                 <div class="block" id="org">

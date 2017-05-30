@@ -4,6 +4,7 @@ var contador = 1;
 
 
 
+
 ﻿function setSidebarHeight(){
 	setTimeout(function(){
 var height = $(document).height();
@@ -36,13 +37,12 @@ function setupLeftMenu() {
 		$('#section-menu .submenu').css('height','auto');
 }
 
-function aceptar_cerrar(){
-	$(document).ready(function(){
-	  $("#hide").click(function(){
-	    $("#cajaproceso").hide();
-	  });
-	  $("#siguiente").click(function(){
-	    $("#cajaproceso").show();
-	  });
-	});
+function desplegar(_elemento,_valor){
+
+	document.getElementById(_elemento).style.visibility= _valor;
+}
+function desplegar2(_elemento,_valor){
+
+	document.getElementById(_elemento).style.display= 'block';
+	document.getElementById(_valor).style.display= 'none';
 }

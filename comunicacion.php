@@ -18,27 +18,8 @@ include('menu.php');
 
 
           <div class="grid_2">
-              <div class="box sidemenu">
-                  <div class="block" id="section-menu">
-                      <ul class="section menu">
-                          <li><a class="menuitem">Inicio</a></li>
-                          <li><a class="menuitem">Norma</a>
-                              <ul class="submenu">
-                                  <li><a>Iso 9001</a> </li>
-                              </ul>
-                          </li>
-                          <li><a class="menuitem">Organizacion</a>
-                              <ul class="submenu">
-                                  <li><a>Perfil</a> </li>
-                                  <li><a>Mision</a> </li>
-                                  <li><a>Vision</a> </li>
-                                  <li><a>Organigrama</a> </li>
-                              </ul>
-                          </li>
-                          <li><a class="menuitem">Tareas</a>
-                      </ul>
-                  </div>
-              </div>
+          <?php  include('menuvertical.php');?>
+
           </div>
 
       <div class="grid_8">
@@ -47,7 +28,8 @@ include('menu.php');
     <form name="chat1">
         Usuario:<?php echo $_SESSION['nombre_usuario'];?><br/>
         <label for="mensaje">Mensaje</label>
-        <textarea name="mensaje" rows="8" cols="80"></textarea><input type="button" class='botonderecho' name="enviar" value="Enviar Mensaje" onclick="submitchat()">
+        <textarea name="mensaje" rows="8" cols="80"></textarea>
+        <input type="button" class='botonmedio' name="enviar" value="Enviar Mensaje" onclick="submitchat()">
     </form>
   </div>
   <div id="chatlogs">

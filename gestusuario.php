@@ -76,71 +76,59 @@
 
 
       <div class="grid_2">
-          <div class="box sidemenu">
-              <div class="block" id="section-menu">
-                  <ul class="section menu">
-                      <li><a class="menuitem">Inicio</a></li>
-                      <li><a class="menuitem">Norma</a>
-                          <ul class="submenu">
-                              <li><a>Iso 9001</a> </li>
-                          </ul>
-                      </li>
-                      <li><a class="menuitem">Organizacion</a>
-                          <ul class="submenu">
-                              <li><a>Perfil</a> </li>
-                              <li><a>Mision</a> </li>
-                              <li><a>Vision</a> </li>
-                              <li><a>Organigrama</a> </li>
-                          </ul>
-                      </li>
-                      <li><a class="menuitem">Tareas</a>
-                  </ul>
-              </div>
-          </div>
+      <?php  include('menuvertical.php');?>
+
       </div>
 
 
             <!--listar-->
       <div class="grid_10">
           <div class="box round">
-              <h2>Lista de usuarios activos</h2>
+              <h2>Lista de usuarios</h2>
               <div class="block">
 
-                  <p>
-                    <input type="button" name="Actualizar" value="Actualizar">
-                  </p>
-                  <table class="table" border="1">
+
+                  <table >
                     <thead>
+                      <th>N°</th>
                       <th>Codigo</th>
                       <th>Nombre Completo</th><th>Email</th>
                       <th>Nombre Usuario</th>
-                      <th>Contrsena</th>
-                      <th>Fecha</th>
+                      <th>Perfil</th>
+                      <th>Estado</th>
+                      <th>Fecha creación</th>
+
+                      <th>Foto</th>
                     </thead>
+                    <tbody>
 
                   <?php
-                     $qr= "SELECT codigo_usuario, nombre_completo, email, nombre_usuario, contrasena, fecha FROM usuario where estado='activo'";
+                  $n = 0;
+                     $qr= "SELECT codigo_usuario, nombre_completo, email, nombre_usuario, p.nombre_perfil, e.nombre_estado, u.fecha , u.foto_perfil FROM usuario u , perfil p, estado e WHERE p.id_perfil = perfil and e.id_estado = u.estado";
                      $cn= mysqli_query($conexion, $qr);
                      while($resul=mysqli_fetch_array($cn))
                      {
-                    echo"<tbody>";
+                       $n =$n + 1;
                     echo"<tr>";
+                    echo"<td>".$n."</td>";
                     echo"<td>".$resul['codigo_usuario']."</td>";
                     echo"<td>".$resul['nombre_completo']."</td>";
                     echo"<td>".$resul['email']."</td>";
                     echo"<td>".$resul['nombre_usuario']."</td>";
-                    echo"<td>".$resul['contrasena']."</td>";
+                    echo"<td>".$resul['4']."</td>";
+                    echo"<td>".$resul['5']."</td>";
                     echo"<td>".$resul['fecha']."</td>";
+                    echo"<td><img width=50px height=50px border-radius=50px src=fotos/".$resul['foto_perfil']." /></td>";
                     echo"</tr>";
-                    echo"</tbody>";
                      }?>
+                   </tbody>
                        </table>
-               <form class="" action="" method="post">
-                  <p>
-                    <input type="submit" name="Historial" value="Actualizar">
-                  </p>
-
-                </form>
+                       <form class="" action="" method="post">
+                         <input type="submit" class="botonmedio" name="" value="Actualizar">
+                       </form>
+              </div>
+              <div class="">
+                <br>
               </div>
               </div>
       </div>
@@ -151,8 +139,8 @@
               <div class="box round">
                   <h2>Crear usuario</h2>
                   <div class="block">
-                        <form class="" action="usuarios.php" method="post" onclick="return validar_campos()">
-                          <table>
+                        <form class="" action="usuarios.php" method="post" onclick="return validar_campos()" enctype="multipart/form-data">
+                          <table class="table" >
 
                                                               <tr>
                                                                 <td>  <label for="codigo">Codigo</label></td>
@@ -185,18 +173,23 @@
                                                                   <option value="1">Administrador</option>
                                                                   <option value="2">Jun</option>
                                                                   <option value="3">Encargado de auditoria</option>
-                                                                  <option value="4">Usuario</option>
-                                                                  <option value="5">Invitado</option>
+
+                                                                  <option value="4">Invitado</option>
                                                                 </select></td>
                                                               </tr>
                                                               <tr>
                                                                 <td> <label for="">Estado</label></td>
-                                                                <td> <input type="radio" name="estado" value="activo" checked>Activo</td>
-                                                                <td> <input type="radio" name="estado" value="inactivo">Inactivo</td>
+                                                                <td> <input type="radio" name="estado" value="1" checked>Activo</td>
+                                                                <td> <input type="radio" name="estado" value="2">Inactivo</td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td><label for="">Foto</label></td>
+                                                                <td><input type="file" name="foto" value=""></td>
+
                                                               </tr>
 
                                                              <tr>
-                                                                <td> <input type="submit" name="boton" value="Crear" ></td>
+                                                                <td colspan="3"> <input type="submit" name="boton" value="Crear" ></td>
                                                               </tr>
 
                                                             </table>
@@ -212,8 +205,8 @@
             <h2>Modificar usuario</h2>
             <div class="block">
 
-              <form class="" action="" method="post" >
-                <table border="2">
+              <form class="" action="" method="post" enctype="multipart/form-data">
+                <table >
                   <tr>
                   <td><input type="text" name="txtbus" value="" placeholder="Ingresar usuario"></td>
                   <td><input type="submit" name="btn1"  value="Buscar"  /></td>
@@ -231,12 +224,13 @@
                                    $var6= "";
                                    $vara6= "";
                                    $vari6= "";$bus="";
+                                   $var7="";
                                    if(isset($_POST["btn1"]))
                                    {
                                    $btn=$_POST["btn1"];
                                    $bus=$_POST["txtbus"];
                                    if($btn=='Buscar'){
-                                     $qr= "SELECT codigo_usuario, nombre_completo, email,  nombre_usuario , contrasena, perfil, estado, fecha FROM usuario WHERE codigo_usuario = '$bus' or nombre_completo = '%$bus%' or nombre_usuario = '%$bus%' ORDER BY FECHA DESC LIMIT 1 ";
+                                     $qr= "SELECT codigo_usuario, nombre_completo, email,  nombre_usuario , contrasena, perfil, estado, fecha, foto_perfil FROM usuario WHERE codigo_usuario = '$bus' or nombre_completo = '%$bus%' or nombre_usuario = '%$bus%' ORDER BY FECHA DESC LIMIT 1 ";
                                      $cn= mysqli_query($conexion, $qr);
 
 
@@ -249,6 +243,7 @@
                                        $var4=$resul[4];
                                        $var5=$resul[5];
                                        $var6=$resul[6];
+                                       $var7=$resul[7];
                                      }
                                      switch($var5){
                                        case 1:
@@ -267,11 +262,11 @@
                                        $vari5= "selected";
                                        break;
                                      }
-                                     if($var6=='activo')
+                                     if($var6=='1')
                                      {
                                        $vara6="checked";
                                      }
-                                    if($var6=='inactivo'){
+                                    else{
                                        $vari6="checked";
                                      }
 
@@ -284,21 +279,19 @@
                                    $contrasena = utf8_decode($_POST['contrasena']);
                                    $perfil= $_POST['perfil'];
                                    $estado = $_POST['estado'];
-                                   $actualizar = utf8_decode('actualización');
-                                   $query = "UPDATE usuario SET estado = 'inactivo' WHERE codigo_usuario ='$codigo'; INSERT INTO usuario (codigo_usuario, nombre_completo, email , nombre_usuario, contrasena ,perfil, estado ,tipo_modificacion) VALUES ($codigo,'$nombre','$email','$nombreusuario','$contrasena','$perfil','$estado','$actualizar')";
+                                   $ruta = "fotos/";
+                                   opendir($ruta);
+                                   $destino = $ruta.$_FILES['foto']['name'];
+                                     copy($_FILES['foto']['tmp_name'],$destino);
 
-                                 /* ejecutar multi consulta */
-                                   if (mysqli_multi_query($conexion,$query)){
-                                       do{
-                                               /* almacenar primer juego de resultados */
-                                          if ($result=mysqli_store_result($conexion)){
-                                             while ($row=mysqli_fetch_row($result)){
-                                                printf("%s\n",$row[0]);
-                                             }
-                                             mysqli_free_result($conexion);
-                                          }
-                                       }while (mysqli_next_result($conexion));
-                                    }
+
+                                     $foto=$_FILES['foto']['name'];
+                                   $query = "UPDATE usuario SET nombre_completo = '$nombre', email = '$email', nombre_usuario ='$nombreusuario',  contrasena= '$contrasena', perfil= '$perfil', estado = '$estado' , foto_perfil = '$foto' WHERE codigo_usuario ='$codigo';";
+
+                                 $rs = mysqli_query( $conexion, $query);
+                                 echo "<script>";
+                                 echo "alert('Usuario modificado');";
+                                                                  echo "</script>";
 
                                  }
          }
@@ -332,13 +325,13 @@
                                         </select></td></tr>
                                   <tr>
                                       <td>  <label for="">Estado</label></td>
-                                    <td>    <input type="radio" name="estado" value="activo" <?php echo $vara6?>>Activo</td>
-                                    <td>    <input type="radio" name="estado" value="inactivo" <?php echo $vari6?>>Inactivo</td></tr>
+                                    <td>    <input type="radio" name="estado" value="1" <?php echo $vara6?>>Activo</td>
+                                    <td>    <input type="radio" name="estado" value="2" <?php echo $vari6?>>Inactivo</td></tr>
+                                    <tr>
+                                        <td>  <label for="">Foto</label></td>
+                                      <td>    <input type="file" name="foto" value="<?php echo $var7?>"></td></tr>
                                 <tr>
-                                      <td>  <input type="submit" name="btn1" value="Modificar" ></td>
-
-                                      <td>  <input type="submit" name="btn1" value="Eliminar"  ></td>
-
+                                      <td colspan="3"><input type="submit" name="btn1" value="Modificar" ></td>
                                     </tr>
 
                                     </table>
@@ -352,37 +345,34 @@
     <div class="box round">
         <h2>Lista de perfiles</h2>
         <div class="block">
-          <p>
-            <input type="button" name="Mostrar" value="Lista perfiles">
-          </p>
-          <table class="table" border="2">
+
+          <table class="table" >
             <thead>
               <th>Nombre Perfil</th>
-              <th>Modulo</th>
-              <th>Fecha</th>
+              <th>Fecha de creación</th>
               <th>Estado</th>
             </thead>
-
+            <tbody>
           <?php
-             $qr= "SELECT nombre_perfil, modulo,fecha , estado FROM perfil ";
+             $qr= "SELECT nombre_perfil,fecha , e.nombre_estado FROM perfil , estado e WHERE estado = e.id_estado";
              $cn= mysqli_query($conexion, $qr);
              while($resul=mysqli_fetch_array($cn))
              {
-            echo"<tbody>";
             echo"<tr>";
             echo"<td>".$resul['nombre_perfil']."</td>";
-            echo"<td>".$resul['modulo']."</td>";
             echo"<td>".$resul['fecha']."</td>";
-            echo"<td>".$resul['estado']."</td>";
+            echo"<td>".$resul[2]."</td>";
             echo"</tr>";
-            echo"</tbody>";
-             }?>
+             }?>               
+             </tbody>
                </table>
-
+               <p>
+                 <input type="button" class="botonmedio "name="Mostrar" value="Actualizar">
+               </p>
         </div>
       </div>
     </div>
-<!--crear perfiles-->
+<!--crear perfiles
           <div class="grid_5">
               <div class="box round">
                   <h2>
@@ -435,7 +425,7 @@
 
     </div>
   </div>
-</div>
+</div> -->
 
 
 
@@ -447,11 +437,7 @@
   <div class="clear">
     </div>
 
-  <div id="site_info">
-      <p>
-          Evaluación de la calidad de los procesos certificados con base a la norma iso 9001 para el apoyo a la toma de decisiones caso: Unidad de Calificación de Años de Servicio UCAS
-      </p>
-  </div>
+
 
 
 
