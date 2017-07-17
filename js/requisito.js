@@ -20,36 +20,63 @@ function submitchat() {
 
 
 //funcion para llamar al php requisito
-function requisitos(rango1, rango2, formu) {
+function requisitos(rango1, rango2, formu, total1, total2) {
+
   var u="si";
   for (var j = rango1; j < rango2; j++) {
     var d = "idcal" + j;
     var c = "idcali" + j;
+    var e = "idcalo2" + j;
+    var f = "idcalio2" + j;
     var w = document.getElementById(d).checked;
-     var z = document.getElementById(c).checked;
-    if (w == false && z == false) {
-       u = "no";
+    var z = document.getElementById(c).checked;
+    var w1 = document.getElementById(e).checked;
+    var z1 = document.getElementById(f).checked;
+    if (w == false && z == false && w1 == false && z1 == false) {
+      u = "no";
     }
   }
   if ( u == "no") {
     alert("No deje requisitos en blanco");
   }
   if ( u == "si") {
-    var cadena = "calificacion" + rango1 + "=" + document.getElementById("idcal" + rango1).checked;
-
-    for (var i = rango1 + 1; i < rango2; i++) {
-      var d = "idcal" + i;
-      //  var idc = document.getElementById(d);
-      var cali = "cal" + i;
-      var cal = document.getElementById(d).checked;
-      cadena = cadena + "&" + "calificacion" + i + "=" + cal;
-      //      cadena = "calificacion1="+cal;
+//    var cadena = "calificacion" + rango1 + "=" + document.getElementsByName("calificacion" + rango1).value;
+     var f = 0;
+     var ff = 0;
+     var n =0;
+     var m =0;
+     var o =0;
+     var f1 = 0;
+   for (var i = rango1 ; i < rango2; i++) {
+      var cal = document.getElementsByName("calificacion"+i);
+      for ( var k = 0; k < cal.length; k++) {
+        if ((cal[k].type == "radio") && (cal[k].checked == true)) {
+        f = parseInt(cal[k].value) + f;
+        if(cal[k].value == 3){
+          ff++;
+        }
+        if(cal[k].value == 2){
+          o++;
+        }
+        if (cal[k].value == 1) {
+          m++;
+        }
+        if (cal[k].value == 0) {
+          n++;
+        }
     }
-    cadena = cadena + "&" + "formulario=" + formu;
+}
+    }
+    f1 = (f * 100) / total1;
+    ff = (ff * 100) / total2;
+    o = (o * 100) / total2;
+    m = (m * 100) / total2;
+    n = (n * 100) / total2;
+    cadena =  "calificacion="+ f1+ "&" +"fort"  + "="+ ff+ "&" +"opor"  + "="+ o+ "&" +"menor="+ m+ "&" +"mayor="+ n+ "&" + "puntaje=" + f + "&"+"formulario=" + formu;
     //         //instanciamos el objetoAjax
     var peticion = null;
     peticion = ConstructorXMLHttpRequest();
-
+//    alert(cadena);
     if (peticion) {
       peticion.open('get', "requisitos.php?" + cadena, false);
       peticion.send(null);

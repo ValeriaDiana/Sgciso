@@ -19,24 +19,24 @@
 
         <div class="block" id="section-menu">
             <ul class="section menu">
-                <li><a class="menuitem">Norma</a>
-                    <ul class="submenu">
-                        <li><a href="index.php">Iso 9001</a> </li>
-                    </ul>
+              <li><a class="menuitem"href="index.php">Inicio</a></li>
+                <li><a class="menuitem" >Norma</a>
+                  <ul class="submenu">
+                    <li><a href="iso.php">ISO 9001</a></li>
+                  </ul>
                 </li>
                 <li><a class="menuitem">Organizacion</a>
                     <ul class="submenu">
-                        <li><a>Mision</a> </li>
-                        <li><a>Vision</a> </li>
-                        <li><a>Historia</a> </li>
-                        <li><a>Organigrama</a> </li>
+                        <li><a href="index.php">Mision</a> </li>
+                        <li><a href="index.php">Vision</a> </li>
+                        <li><a href="index.php">Historia</a> </li>
+                        <li><a href="index.php">Organigrama</a> </li>
 
                     </ul>
                 </li>
                 <li><a class="menuitem">Tareas</a>
             </ul>
         </div>
-
     <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>    <br/>
     <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>  <br/>
     <br/>    <br/> <br/>  <br/>

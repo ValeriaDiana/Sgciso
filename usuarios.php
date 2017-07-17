@@ -27,7 +27,7 @@ switch ($boton)
               $rs = mysqli_query( $conexion, $consulta);
               echo "<script>";
               echo "alert('Nuevo usuario registrado');";
-            
+
               echo "</script>";
         break;
         case 'Modificar':
@@ -80,6 +80,7 @@ switch ($boton)
                 $rs = mysqli_query( $conexion, $consulta);
 
           break;
+
 
   default:
   print_r("Error");

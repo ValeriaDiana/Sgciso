@@ -5,7 +5,7 @@ include ('menu.php');
 
 ?>
 <?php
-                       $qr= "UPDATE dominio set valor_evaluacion =0";
+                       $qr= "UPDATE dominio set valor_evaluacion =0 , evaluado = 0";
                        $cn= mysqli_query($conexion, $qr);
  ?>
 
@@ -49,8 +49,10 @@ include ('menu.php');
       <form id="registrohallazgo" method="post">
         <label for="tipo">Tipo hallazgo</label>
         <select class=""id="tipohallazgo" name="tipo" >
-              <option value="1">Observación</option>
-              <option value="2">No Conformidad</option>
+              <option value="1">Fortaleza</option>
+              <option value="2">Oportunidad de mejora</option>
+              <option value="3">No conformidad menor</option>
+              <option value="4">No conformidad mayor</option>
             </select><br>
         <label for="descripcion">Descripción </label>
         <textarea id="descripcionhallazgo" rows="8" cols="60"></textarea>
@@ -89,8 +91,17 @@ include ('menu.php');
           <li>Los requisitos se encuentran agrupados de acuerdo al dominio al que pertenecen.</li>
           <li>La calificación de los requisitos puede ser una de  las siguientes:</li>
           <ul>
-            <li>No Confomidad</li>
-            <li>Observación</li>
+            <li>Fortaleza</li>
+            <li>Oportunidad de mejora</li>
+            <li>No conformidad menor</li>
+            <li>No conformidad mayor</li>
+          </ul>
+          <li>Considere que la calificación de cada requisito tiene relacion con su aporte al nivel de calidad. En este sentido la calificación es la siguiente:</li>
+          <ul>
+            <li>Fortaleza               3 puntos</li>
+            <li>Oportunidad de mejora   2 puntos</li>
+            <li>No conformidad menor    1 punto</li>
+            <li>No conformidad mayor    0 puntos</li>
           </ul>
           <li>Puede registrar los hallazgos durante la realización del proceso de evaluación.</li>
           <li>Antes de pasar el siguiente dominio debe evaluar el dominio actual.</li>
@@ -115,19 +126,22 @@ include ('menu.php');
     <table  >
       <thead>
         <tr>
-          <th colspan="5">NORMA ISO 9001</th>
+          <th colspan="7">NORMA ISO 9001</th>
         </tr>
         <tr>
-          <th colspan="5">REQUISITOS GENERALES Y DE DOCUMENTACIÓN</th>
+          <th colspan="7">REQUISITOS GENERALES Y DE DOCUMENTACIÓN</th>
+        </tr>
+        <tr>
+          <th colspan="7">F= Fortaleza, O = Oportunidad de mejora, m= no conformidad menor, M= no conformidad mayor</th>
         </tr>
         <tr>
           <th>N°</th>
-          <th>Requisito</th>
-          <th>Observacion</th>
-          <th>No conformidad</th>
+          <th>Descripción requisitos</th>
+          <th>F</th>
+          <th>O</th>
+          <th>m</th>
+          <th>M</th>
         </tr>
-
-
       </thead>
           <tbody>
         <?php
@@ -138,19 +152,22 @@ include ('menu.php');
                                while($resul=mysqli_fetch_array($cn))
                                {?>
                           <tr>
-                          <td><?php echo $resul['id_req'];?></td>
-                          <td width=70%><?php echo $resul['nombre_requisito'];?></td>
-                          <td width=15%> <input type="radio" value="1" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
-                          <td widht=15%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                          <td width=10%><?php echo $resul['id_req'];?></td>
+                          <td width=50%><?php echo $resul['nombre_requisito'];?></td>
+                          <td width=10%> <input type="radio" value="3" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                          <td widht=10%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                          <td width=10%> <input type="radio" value="1" id="idcalo2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                          <td width=10%><input type="radio" value="0" id="idcalio2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
 
                             <?php } ?></tr>
           </tbody>
 
       </table>
-        <input type="button" class="botonmedio" value="Evaluar I" onclick="requisitos(1,19,1)" >
+        <input type="button" class="botonmedio" value="Evaluar I" onclick="requisitos(1,19,1,54,18)" >
 
         <br/>
-        <div id="resp1" >
+        <div id="resp1">
+
         </div>
   </form>
   </div>
@@ -177,16 +194,21 @@ include ('menu.php');
             <table>
               <thead>
                 <tr>
-                  <th colspan="5">NORMA ISO 9001</th>
+                  <th colspan="7">NORMA ISO 9001</th>
                 </tr>
                 <tr>
-                  <th colspan="5">RESPONSABILIDAD DE LA DIRECCIÓN</th>
+                  <th colspan="7">RESPONSABILIDAD DE LA DIRECCIÓN</th>
+                </tr>
+                <tr>
+                  <th colspan="7">F= Fortaleza, O = Oportunidad de mejora, m= no conformidad menor, M= no conformidad mayor</th>
                 </tr>
                 <tr>
                   <th>N°</th>
-                  <th>Requisito</th>
-                  <th>Observación</th>
-                  <th>No Conformidad</th>
+                  <th>Descripción requisitos</th>
+                  <th>F</th>
+                  <th>O</th>
+                  <th>m</th>
+                  <th>M</th>
                 </tr>
               </thead>
               <tbody>
@@ -198,14 +220,16 @@ include ('menu.php');
                                    while($resul=mysqli_fetch_array($cn))
                                    {?>
                               <tr>
-                              <td><?php echo $resul['id_req'];?></td>
-                              <td width=70%><?php echo $resul['nombre_requisito'];?></td>
-                              <td width=15%> <input type="radio" value="1" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
-                              <td widht=15%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%><?php echo $resul['id_req'];?></td>
+                              <td width=50%><?php echo $resul['nombre_requisito'];?></td>
+                              <td width=10%> <input type="radio" value="3" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td widht=10%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%> <input type="radio" value="1" id="idcalo2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td width=10%><input type="radio" value="0" id="idcalio2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
                                 <?php } ?></tr>
               </tbody>
           </table>
-            <input type="button" class="botonmedio" value="Evaluar II" onclick="requisitos(19,41,2)" >
+            <input type="button" class="botonmedio" value="Evaluar II" onclick="requisitos(19,41,2,66,22)" >
             <br/>
             <div id="resp2" >
             </div>
@@ -231,16 +255,21 @@ include ('menu.php');
             <table>
               <thead>
                 <tr>
-                  <th colspan="5">NORMA ISO 9001</th>
+                  <th colspan="7">NORMA ISO 9001</th>
                 </tr>
                 <tr>
-                  <th colspan="5">RESPONSABILIDAD DE LA DIRECCIÓN</th>
+                  <th colspan="7">GESTIÓN DE RECURSOS</th>
+                </tr>
+                <tr>
+                  <th colspan="7">F= Fortaleza, O = Oportunidad de mejora, m= no conformidad menor, M= no conformidad mayor</th>
                 </tr>
                 <tr>
                   <th>N°</th>
-                  <th>Requisito</th>
-                  <th>Observación</th>
-                  <th>No Conformidad</th>
+                  <th>Descripción requisitos</th>
+                  <th>F</th>
+                  <th>O</th>
+                  <th>m</th>
+                  <th>M</th>
                 </tr>
               </thead>
               <tbody>
@@ -252,14 +281,16 @@ include ('menu.php');
                                    while($resul=mysqli_fetch_array($cn))
                                    {?>
                               <tr>
-                              <td><?php echo $resul['id_req'];?></td>
-                              <td width=70%><?php echo $resul['nombre_requisito'];?></td>
-                              <td width=15%> <input type="radio" value="1" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
-                              <td widht=15%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%><?php echo $resul['id_req'];?></td>
+                              <td width=50%><?php echo $resul['nombre_requisito'];?></td>
+                              <td width=10%> <input type="radio" value="3" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td widht=10%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%> <input type="radio" value="1" id="idcalo2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td width=10%><input type="radio" value="0" id="idcalio2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
                                 <?php } ?></tr>
               </tbody>
           </table>
-            <input type="button" class="botonmedio" value="Evaluar III" onclick="requisitos(41,52,3)" >
+            <input type="button" class="botonmedio" value="Evaluar III" onclick="requisitos(41,52,3,33,11)" >
             <br/>
             <div id="resp3" >
             </div>
@@ -285,16 +316,21 @@ include ('menu.php');
             <table>
               <thead>
                 <tr>
-                  <th colspan="5">NORMA ISO 9001</th>
+                  <th colspan="7">NORMA ISO 9001</th>
                 </tr>
                 <tr>
-                  <th colspan="5">REALIZACIÓN DEL SERVICIO</th>
+                  <th colspan="7">REALIZACIÓN DEL SERVICIO</th>
+                </tr>
+                <tr>
+                  <th colspan="7">F= Fortaleza, O = Oportunidad de mejora, m= no conformidad menor, M= no conformidad mayor</th>
                 </tr>
                 <tr>
                   <th>N°</th>
-                  <th>Requisito</th>
-                  <th>Observación</th>
-                  <th>No Conformidad</th>
+                  <th>Descripción requisitos</th>
+                  <th>F</th>
+                  <th>O</th>
+                  <th>m</th>
+                  <th>M</th>
                 </tr>
               </thead>
               <tbody>
@@ -306,14 +342,16 @@ include ('menu.php');
                                    while($resul=mysqli_fetch_array($cn))
                                    {?>
                               <tr>
-                              <td><?php echo $resul['id_req'];?></td>
-                              <td width=70%><?php echo $resul['nombre_requisito'];?></td>
-                              <td width=15%> <input type="radio" value="1" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
-                              <td widht=15%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%><?php echo $resul['id_req'];?></td>
+                              <td width=50%><?php echo $resul['nombre_requisito'];?></td>
+                              <td width=10%> <input type="radio" value="3" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td widht=10%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%> <input type="radio" value="1" id="idcalo2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td width=10%><input type="radio" value="0" id="idcalio2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
                                 <?php } ?></tr>
               </tbody>
           </table>
-            <input type="button" class="botonmedio" value="Evaluar IV" onclick="requisitos(52,69,4)" >
+            <input type="button" class="botonmedio" value="Evaluar IV" onclick="requisitos(52,69,4,51,17)" >
             <br/>
             <div id="resp4" >
             </div>
@@ -340,16 +378,21 @@ include ('menu.php');
             <table>
               <thead>
                 <tr>
-                  <th colspan="5">NORMA ISO 9001</th>
+                  <th colspan="7">NORMA ISO 9001</th>
                 </tr>
                 <tr>
-                  <th colspan="5">MEDICIÓN, ANÁLISIS Y MEJORA</th>
+                  <th colspan="7">MEDICIÓN, ANÁLISIS Y MEJORA</th>
+                </tr>
+                <tr>
+                  <th colspan="7">F= Fortaleza, O = Oportunidad de mejora, m= no conformidad menor, M= no conformidad mayor</th>
                 </tr>
                 <tr>
                   <th>N°</th>
-                  <th>Requisito</th>
-                  <th>Observación</th>
-                  <th>No Conformidad</th>
+                  <th>Descripción requisitos</th>
+                  <th>F</th>
+                  <th>O</th>
+                  <th>m</th>
+                  <th>M</th>
                 </tr>
               </thead>
               <tbody>
@@ -361,17 +404,19 @@ include ('menu.php');
                                    while($resul=mysqli_fetch_array($cn))
                                    {?>
                               <tr>
-                              <td><?php echo $resul['id_req'];?></td>
-                              <td width=70%><?php echo $resul['nombre_requisito'];?></td>
-                              <td width=15%> <input type="radio" value="1" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
-                              <td widht=15%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%><?php echo $resul['id_req'];?></td>
+                              <td width=50%><?php echo $resul['nombre_requisito'];?></td>
+                              <td width=10%> <input type="radio" value="3" id="idcal<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td widht=10%><input type="radio" value="2" id="idcali<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
+                              <td width=10%> <input type="radio" value="1" id="idcalo2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>" ></td>
+                              <td width=10%><input type="radio" value="0" id="idcalio2<?php echo $resul['id_req'] ?>" name="calificacion<?php echo $resul['id_req'] ?>"  ></td>
                                 <?php } ?></tr>
               </tbody>
           </table>
-            <input type="button" class="botonmedio" value="Evaluar V" onclick="requisitos(69,101,5)" ><br>
+            <input type="button" class="botonmedio" value="Evaluar V" onclick="requisitos(69,101,5,96,32)" ><br>
             <div id="resp5" >
             </div>
-            <input type="button" class="botonderecho" name="Resultados" value="Resultados" onclick="location='resultados.php'" >
+            <input type="button" class="botonderecho" name="Resultados" value="Resultados" onclick="javascript:validarevaluacion()" >
           </form>
         </div>
 

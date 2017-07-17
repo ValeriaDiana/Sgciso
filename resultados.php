@@ -74,13 +74,9 @@
                                  <?php } ?>
              </tbody>
             </table>
-
           </form>
-
-
-
+          <input type="button" class="botonmedio" name="detalles" onclick="desplegar('detalle','visible')" value="Detalles">
         </div>
-
     </div>
   </div>
 
@@ -107,11 +103,38 @@
               </tr>
                <tr style="height:50px; font-size:36px;">
                 <td><em><strong><?php echo round(include_once('cumplimiento.php'),0) ?> %</strong></em></td>
-                <td><em><strong><?php echo include_once ('reglas.php');?></strong></em></td>
+                <td><em><strong><?php echo include ('reglas.php');?></strong></em></td>
               </tr>
               <tr>
                 <td> de cumplimiento de los requisitos</td>
                 <td>calificación</td>
+             </tr>
+             <tr>
+               <th colspan="3">RECOMENDACION:</th>
+             </tr>
+             <tr>
+               <td colspan="3"><em> <?php
+                                       $qr = include ('reglas.php');
+                                       if(strcmp($qr, 'totalmente inaceptable') === 0){
+                                          echo "Este nivel es totalmente inaceptable, por lo que se recomienda revisar la identificación de los procesos, el manual de calidad, la existencia de la política de calidad.";
+                                       }
+                                       if(strcmp($qr, 'muy bajo') === 0)
+                                       {
+                                         echo "El resultado es muy bajo por lo que se recomienda analizar con mayor profundidad la documentación e implementación del SGC.";
+                                       }
+                                       if(strcmp($qr, 'bajo') === 0)
+                                       {
+                                         echo "La mitad de los requisitos no se cumplen, se recomienda revisar la documentación y establecimiento del SGC.";
+                                       }
+                                       if(strcmp($qr, 'regular') === 0)
+                                       {
+                                         echo "No se cumple con los requisitos en un nivel aceptable, se recomienda revisar la existencia de la mejora continua de los requisitos.";
+                                       }
+                                       if(strcmp($qr, 'aceptable') === 0)
+                                       {
+                                         echo "El sistema de gestión de calidad cumple con los requisitos generales, por lo tanto se encuentra en un nivel aceptable, se recomienda evaluar la mejora continua.";
+                                       }
+                                       ?></em></td>
              </tr>
              </tbody>
             </table>
@@ -121,6 +144,7 @@
 
 
         </div>
+
 
     </div>
   </div>
@@ -165,7 +189,7 @@
         }
     },
     series: [{
-        name: 'Observación',
+        name: 'Cumplimiento ',
         data: [<?php
           $query = "SELECT * FROM dominio; ";
           $rs = mysqli_query( $conexion, $query);
@@ -178,7 +202,7 @@
           ?>
           ]
     }, {
-        name: 'No Conformidad',
+        name: 'No Cumplimiento',
         data: [<?php
           $query = "SELECT * FROM dominio; ";
           $rs = mysqli_query( $conexion, $query);
@@ -254,7 +278,7 @@ $('#large').click(function () {
           <br>
           <input type="button" name="Recomendaciones" onclick="desplegar('listarecomendacion','visible')" value="Recomendaciones">
           <br>
-          <a class="bontonmedio" href="output.php?t=pdf" target="_blank">Imprimir</a>
+          <a class="bontonmedio" href="informes/informe1.php" target="_blank">Imprimir</a>
 
           </div>
             <td></td>
@@ -315,7 +339,6 @@ $('#large').click(function () {
           </div>
   </div>
       </div>
-  </div>
 
   <div class="clear">
   </div>
@@ -324,13 +347,7 @@ $('#large').click(function () {
   <div id='grafica2' class="bgventana">
       <a href="javascript:desplegar('grafica2','hidden');" class="cerrar">X</a>
       <div id='container2' class="ventana" style="width: 600px; min-width: 310px; height: 500px; padding: 5px; ">
-
-
-          </div>
-
-
-
-          <script type="text/javascript">
+        <script type="text/javascript">
 
           Highcharts.chart('container2', {
           chart: {
@@ -380,11 +397,143 @@ $('#large').click(function () {
           }]
         });
           </script>
-
-
+                    </div>
   </div>
 
+  <div id='detalle' class="bgventana">
+      <a href="javascript:desplegar('detalle','hidden');" class="cerrar">X</a>
+      <div id='container3' class="ventana" style="width: 800px; min-width: 310px; height: 500px; padding: 5px; ">
+                    <script type="text/javascript">
+          var chart = Highcharts.chart('container3', {
 
+  chart: {
+      type: 'column'
+  },
+
+  title: {
+      text: 'RESULTADOS DE LA EVALUACIÓN'
+  },
+
+  legend: {
+      align: 'right',
+      verticalAlign: 'middle',
+      layout: 'vertical'
+  },
+
+  xAxis: {
+      categories: ['SGC', 'RD', 'GR','RS','MAyM'],
+      labels: {
+          x: 0
+      }
+  },
+
+  yAxis: {
+      allowDecimals: true,
+      title: {
+          text: 'CALIFICACION(%)'
+      }
+  },
+  series: [{
+      name: 'Fortaleza ',
+      data: [<?php
+        $query = "SELECT * FROM dominio; ";
+        $rs = mysqli_query( $conexion, $query);
+        while($resul = mysqli_fetch_array($rs))
+        {
+        ?>
+          <?php  echo round($resul['fortaleza'],0) ?> ,
+        <?php
+        }
+        ?>
+        ]
+  }, {
+      name: 'Oportunidad de mejora',
+      data: [<?php
+        $query = "SELECT * FROM dominio; ";
+        $rs = mysqli_query( $conexion, $query);
+        while($resul = mysqli_fetch_array($rs))
+        {
+        ?>
+          <?php  $rsul2 = round($resul['oportunidad_mejora'] ,0);
+          echo $rsul2; ?> ,
+        <?php
+        }
+        ?>
+
+      ]
+  },{
+      name: 'No conformidad menor ',
+      data: [<?php
+        $query = "SELECT * FROM dominio; ";
+        $rs = mysqli_query( $conexion, $query);
+        while($resul = mysqli_fetch_array($rs))
+        {
+        ?>
+          <?php  echo round($resul['no_conformidad_menor'],0) ?> ,
+        <?php
+        }
+        ?>
+        ]
+  }, {
+      name: 'No conformidad mayor',
+      data: [<?php
+        $query = "SELECT * FROM dominio; ";
+        $rs = mysqli_query( $conexion, $query);
+        while($resul = mysqli_fetch_array($rs))
+        {
+        ?>
+          <?php  $rsul2 = round($resul['no_conformidad_mayor'] ,0);
+          echo $rsul2; ?> ,
+        <?php
+        }
+        ?>
+
+      ]
+  }],
+
+  responsive: {
+      rules: [{
+          condition: {
+              maxWidth: 500
+          },
+          chartOptions: {
+              legend: {
+                  align: 'center',
+                  verticalAlign: 'bottom',
+                  layout: 'horizontal'
+              },
+              yAxis: {
+                  labels: {
+                      align: 'center',
+                      x: 0,
+                      y: 0
+                  },
+                  title: {
+                      text: null
+                  }
+              },
+              subtitle: {
+                  text: null
+              },
+              credits: {
+                  enabled: false
+              }
+          }
+      }]
+  }
+});
+
+$('#small').click(function () {
+  chart.setSize(400, 300);
+});
+
+$('#large').click(function () {
+  chart.setSize(600, 300);
+});
+
+          </script>
+  </div>
+</div>
 
 
 

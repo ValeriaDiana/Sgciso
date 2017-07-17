@@ -35,8 +35,10 @@ include ('menu.php');
       <form id="registrohallazgo2" method="post">
         <label for="tipo">Tipo hallazgo</label>
         <select class=""id="tipohallazgo2" name="tipo" >
-              <option value="1">Observación</option>
-              <option value="2">No Conformidad</option>
+              <option value="1">Fortaleza</option>
+              <option value="2">Oportunidad de mejora</option>
+              <option value="3">No conformidad menor</option>
+              <option value="4">No conformidad mayor</option>
             </select><br>
         <label for="descripcion">Descripción </label>
         <textarea id="descripcionhallazgo2" rows="8" cols="60"></textarea>

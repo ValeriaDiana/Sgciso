@@ -1,10 +1,10 @@
-  ﻿<!DOCTYPE html><?php
+<?php
 
   include ('conexion.php');
   include ('menu.php');
 
   ?>
-
+  ﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -55,24 +55,24 @@
                   <table id='tablainicio'>
                     <thead  id ='cabezatablainicio' style="">
                       <th style="background-color: white; "> Objetivos</th>
+                      <th style="background-color: white;">No conformidades</th>
                       <th style="background-color: white;">Infraestructura</th>
                       <th style="background-color: white;">Personal</th>
-                      <th style="background-color: white;">No conformidades</th>
                       <th style="background-color: white;">Nivel de calidad</th>
                     </thead>
-                    <tbody style="height:100px; width:100px; font-size:48; ">
+                    <tbody style="height:100px; width:100px; font-size:45px; ">
                       <tr  style="height:40px; background-color:white;">
                         <td style="border-left:solid;">&#10003;</td>
+                        <td style="border-left:solid;">&#9928; </td>
                         <td style="border-left:solid;">&#128187;</td>
                         <td style="border-left:solid; ">&#9997;</td>
-                        <td style="border-left:solid;">&#9928; </td>
                         <td style="border-left:solid; border-right:solid;">&#128505; </td>
                       </tr>
                       <tr style="background-color:white;">
                         <td style="border-left:solid;">3</td>
-                        <td style="border-left:solid;"></td>
-                        <td style="border-left:solid;"></td>
                         <td style="border-left:solid;"><?php echo round((100-include('cumplimiento.php')),0); ?>%</td>
+                        <td style="border-left:solid;">30</td>
+                        <td style="border-left:solid;">30</td>
                         <td style="border-left:solid;border-right:solid;"><?php echo round(include('cumplimiento.php'),0); ?>%</td>
                      </tr>
                     </tbody>

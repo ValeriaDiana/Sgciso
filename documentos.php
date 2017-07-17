@@ -89,7 +89,7 @@ $(function(){
              <label for="">Título </label>
              <input type="text" name="titulo" value=""><br>
              <input type="file" name="doc" value="">
-             <input type="button" class="botonmedio" name="subir" value="Subir">
+             <input type="submit" class="botonmedio" name="subir" value="Subir">
             </form>
 
             </table>

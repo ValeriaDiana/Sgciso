@@ -11,7 +11,11 @@ span {
   border: 5px solid white;
 }
 
-
+@media only screen and (max-width: 768px) {
+    div#site_info {
+      visibility:hidden;
+    }
+}
 /*
 -----------------------------------------------
 inicio
@@ -47,7 +51,7 @@ text-align: center;
 }
 #cabezatablainicio th{
 
-  font-size:14;
+  font-size:23px;
   height:30px;
   color: #73879C !important;
 }

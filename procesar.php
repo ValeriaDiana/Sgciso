@@ -1,4 +1,5 @@
 <?php
+print_r("Hola");
 session_start();
 include('conexion.php');
 if (isset($_SESSION['nombre_usuario'])) {

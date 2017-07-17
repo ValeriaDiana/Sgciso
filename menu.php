@@ -49,12 +49,12 @@ $('#slider div:first-child').fadeOut(0)
 <div class="container_12">
   <div class="grid_12 header-repeat">
     <div class="floatleft">
-        <a  href="index.php"><img width="200px" height="50px" src="img/cas.png" alt="Logo" /> </a></div>
+        <a  href="index.php"><img width="220px" height="70px" src="img/cas.png" alt="Logo" /> </a></div>
       <div id="branding">
 
           <div class="floatright">
-
-              <div class="floatleft marginleft10">
+              <div class="floatleft">
+                <div class="floatleft marginleft10">
                   <ul class="inline-ul floatleft">
                       <li><?php if (isset($_SESSION['nombre_usuario'])) {
                       echo "Bienvenid@, ".$_SESSION['nombre_usuario'];
@@ -84,7 +84,7 @@ $('#slider div:first-child').fadeOut(0)
           <li><a href="documentos.php"><span>&#128459;</span> Documentos</a>
             <ul>
                               <li><a href="documentosreg.php">Registros</a></li>
-                              <li><a href="docregpres.php">Registros de prestación de servicio</a></li>
+                              <li><a href="documentos.php">Registros de prestación de servicio</a></li>
                               <li><a href="documentos.php">Procedimientos</a></li>
                               <li><a href="documentos.php">Manual de calidad</a></li>
                               <li><a href="documentos.php">Instructivo de trabajo</a></li>
@@ -118,7 +118,7 @@ $('#slider div:first-child').fadeOut(0)
                 <li><a href="hallazgos.php">Lista de hallazgos</a> </li>
                           </ul>
           </li>
-          <li><a href="registros.php"><span>&#128501; </span>Registros</a>
+          <li><a href="hallazgos.php"><span>&#128501; </span>Registros</a>
             <ul>
                 <li><a href="hallazgos.php">Lista de registros</a> </li>
                           </ul>
